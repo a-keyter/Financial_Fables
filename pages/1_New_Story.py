@@ -203,7 +203,7 @@ if generate:
     col1, col2, col3 = st.columns(3)
     with col2:
       st.markdown(f"![Alt Text]({get_img_url['signedURL']})")
-    st.write("-")
+
     st.write(story_chunks[i])
 
 

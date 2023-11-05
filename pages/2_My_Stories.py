@@ -23,7 +23,7 @@ if load:
   for story in story_data.data:
     if current_story == story["story_title"]:
       story_id = story["story_id"]
-      st.write(story_id)
+      
       frame_data = supabase.table('Frames').select("*").eq("story_id", story_id).execute()
       
       frames = frame_data.data
