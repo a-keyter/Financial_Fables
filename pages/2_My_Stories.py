@@ -23,12 +23,14 @@ if load:
   for story in story_data.data:
     if current_story == story["story_title"]:
       story_id = story["story_id"]
+      st.write(story_id)
       frame_data = supabase.table('Frames').select("*").eq("story_id", story_id).execute()
       
       frames = frame_data.data
+      sorted_frames = sorted(frames, key=lambda x: x['story_id'])
 
       for i in range(0, 10):
-        frame_id = frames[i]["frame_id"]
+        frame_id = sorted_frames[i]["frame_id"]
         frame_no = (i+1)
         image_ref = f"{story_id}.{frame_id}.{frame_no}.png"
         get_img_url = supabase.storage.from_("images").create_signed_url(image_ref, 600)  # 60 is the number of seconds the URL will be valid for.
