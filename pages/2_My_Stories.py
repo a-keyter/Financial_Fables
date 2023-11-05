@@ -30,7 +30,8 @@ if load:
       for i in range(0, 10):
         frame_id = frames[i]["frame_id"]
         frame_no = (i+1)
-        get_img_url = supabase.storage.from_("images").create_signed_url(f"{story_id}.{frame_id}.{frame_no}.png", 600)  # 60 is the number of seconds the URL will be valid for.
+        image_ref = f"{story_id}.{frame_id}.{frame_no}.png"
+        get_img_url = supabase.storage.from_("images").create_signed_url(image_ref, 600)  # 60 is the number of seconds the URL will be valid for.
         col1, col2, col3 = st.columns(3)
         with col2:
           st.markdown(f"![Alt Text]({get_img_url['signedURL']})")
