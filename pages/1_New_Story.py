@@ -20,8 +20,11 @@ openaikey = st.secrets["openaikey"]
 supabase_url = st.secrets["supabase_url"]
 supabase_key = st.secrets["supabase_key"]
 
+openai.api_key = openaikey
+
 ## Set Environment Variables ##
 supabase: Client = create_client(supabase_url, supabase_key)
+
 os.environ['OPENAI_API_KEY'] = openaikey
 
 
