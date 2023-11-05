@@ -3,11 +3,6 @@ import time
 
 from base64 import b64decode
 
-# This video explains how to save b64 as file.
-# https://www.youtube.com/watch?v=-vFrV1LRhd0
-
-# Store file to Bytes.io, then upload to supabase
-
 import openai
 import streamlit as st
 
@@ -159,8 +154,9 @@ if generate:
   st.divider()
 
   #Display image to webpage
-  st.markdown(f"![Alt Text]({get_img_url['signedURL']})")
-  st.write("-")
+  col1, col2, col3 = st.columns(3)
+  with col2:
+    st.markdown(f"![Alt Text]({get_img_url['signedURL']})")
   st.write(story_chunks[0])
 
   for i in range(1, 10):
@@ -200,9 +196,10 @@ if generate:
       get_img_url = supabase.storage.from_("images").create_signed_url(f"{story_id}.{frame_id}.{frame_no}.png", 600)  # 60 is the number of seconds the URL will be valid for.
 
     st.divider()
-    
     #Display image to webpage
-    st.markdown(f"![Alt Text]({get_img_url['signedURL']})")
+    col1, col2, col3 = st.columns(3)
+    with col2:
+      st.markdown(f"![Alt Text]({get_img_url['signedURL']})")
     st.write("-")
     st.write(story_chunks[i])
 
