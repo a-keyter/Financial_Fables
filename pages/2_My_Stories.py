@@ -27,7 +27,7 @@ if load:
       frame_data = supabase.table('Frames').select("*").eq("story_id", story_id).execute()
       
       frames = frame_data.data
-      sorted_frames = sorted(frames, key=lambda x: x['story_id'])
+      sorted_frames = sorted(frames, key=lambda x: x['frame_no'])
 
       for i in range(0, 10):
         frame_id = sorted_frames[i]["frame_id"]

@@ -169,7 +169,7 @@ if generate:
 
       #find frame_id
       frame_id = newFrame.data[0]["frame_id"]
-      frame_no = i+1
+      frame_no = newFrame.data[0]["frame_no"]
 
       #generate image description
       image_desc = image_description(story_chunks[i], art_style)
@@ -190,9 +190,9 @@ if generate:
 
       # upload image to supabase
       upload_response = supabase.storage.from_("images").upload(
-      file=b64_image_data,      
-      path=f"{story_id}.{frame_id}.{frame_no}.png",
-      file_options={"content-type": "image/png"}
+        file=b64_image_data,      
+        path=f"{story_id}.{frame_id}.{frame_no}.png",
+        file_options={"content-type": "image/png"}
       )
       
       #Get link to image
