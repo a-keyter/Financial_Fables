@@ -23,14 +23,15 @@ if load:
   for story in story_data.data:
     if current_story == story["story_title"]:
       story_id = story["story_id"]
-  frame_data = supabase.table('Frames').select("*").eq("story_id", story_id).execute()
-  frames = frame_data.data
+      frame_data = supabase.table('Frames').select("*").eq("story_id", story_id).execute()
+      
+      frames = frame_data.data
 
-  for i in range(0, 10):
-    frame_id = frames[i]["frame_id"]
-    frame_no = (i+1)
-    get_img_url = supabase.storage.from_("images").create_signed_url(f"{story_id}.{frame_id}.{frame_no}.png", 600)  # 60 is the number of seconds the URL will be valid for.
-    col1, col2, col3 = st.columns(3)
-    with col2:
-      st.markdown(f"![Alt Text]({get_img_url['signedURL']})")
-    st.write(frames[i]["frame_text"])
+      for i in range(0, 10):
+        frame_id = frames[i]["frame_id"]
+        frame_no = (i+1)
+        get_img_url = supabase.storage.from_("images").create_signed_url(f"{story_id}.{frame_id}.{frame_no}.png", 600)  # 60 is the number of seconds the URL will be valid for.
+        col1, col2, col3 = st.columns(3)
+        with col2:
+          st.markdown(f"![Alt Text]({get_img_url['signedURL']})")
+        st.write(frames[i]["frame_text"])
